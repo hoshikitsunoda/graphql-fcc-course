@@ -14,8 +14,6 @@ const getAuthorsQuery = gql`
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
 
-  if (loading) return <div>Loading authors...</div>
-
   return (
     <form id="add-book">
       <div className="field">
@@ -30,13 +28,17 @@ const AddBook = () => {
         <label>Author:</label>
         <select>
           <option>Select author</option>
-          {data.authors.map((author) => {
-            return (
-              <option key={author.id} value={author.id}>
-                {author.name}
-              </option>
-            )
-          })}
+          {loading ? (
+            <option>Loading authors...</option>
+          ) : (
+            data.authors.map((author) => {
+              return (
+                <option key={author.id} value={author.id}>
+                  {author.name}
+                </option>
+              )
+            })
+          )}
         </select>
       </div>
       <button>+</button>
