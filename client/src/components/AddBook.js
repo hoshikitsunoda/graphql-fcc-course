@@ -14,7 +14,7 @@ const getAuthorsQuery = gql`
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
 
-  const authorOptions = () => {
+  const displayAuthors = () => {
     return loading ? (
       <option>Loading authors...</option>
     ) : (
@@ -42,7 +42,7 @@ const AddBook = () => {
         <label>Author:</label>
         <select>
           <option>Select author</option>
-          {authorOptions()}
+          {displayAuthors()}
         </select>
       </div>
       <button>+</button>
