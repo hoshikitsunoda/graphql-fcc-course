@@ -11,13 +11,17 @@ const getBooksQuery = gql`
   }
 `
 
-function BookList() {
-  const { data } = useQuery(getBooksQuery)
-  console.log(data)
+const BookList = () => {
+  const { loading, data } = useQuery(getBooksQuery)
+
+  if (loading) return <div>Loading books...</div>
+
   return (
     <div id="main">
       <ul id="book-list">
-        <li>Book name</li>
+        {data.books.map((book) => {
+          return <li key={book.id}>{book.name}</li>
+        })}
       </ul>
     </div>
   )
