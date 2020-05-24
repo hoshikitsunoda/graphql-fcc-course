@@ -6,7 +6,7 @@ import { getAuthorsQuery, addBookMutation } from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
-  const [addBookAction] = useMutation(addBookMutation)
+  const [addBookToDatabase] = useMutation(addBookMutation)
   const [bookData, setState] = useState({
     name: '',
     genre: '',
@@ -33,7 +33,13 @@ const AddBook = () => {
 
   const submitForm = (event) => {
     event.preventDefault()
-    addBookAction()
+    addBookToDatabase({
+      variables: {
+        name: bookData.name,
+        genre: bookData.genre,
+        authorId: bookData.authorId,
+      },
+    })
   }
 
   return (
