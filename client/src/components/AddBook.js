@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { getAuthorsQuery } from '../queries/queries'
+import { compose } from 'recompose'
+import { getAuthorsQuery, addBookMutation } from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
