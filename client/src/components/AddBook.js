@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { graphql } from 'react-apollo'
 import { compose } from 'recompose'
-import { getAuthorsQuery, addBookMutation } from '../queries/queries'
+import {
+  getAuthorsQuery,
+  addBookMutation,
+  getBooksQuery,
+} from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
@@ -39,6 +43,7 @@ const AddBook = () => {
         genre: bookData.genre,
         authorId: bookData.authorId,
       },
+      refetchQueries: [{ query: getBooksQuery }],
     })
   }
 
