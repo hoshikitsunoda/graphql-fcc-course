@@ -7,7 +7,7 @@ const AddBook = () => {
   const [bookData, setData] = useState({
     name: '',
     genre: '',
-    author: '',
+    authorId: '',
   })
 
   const displayAuthors = () => {
@@ -28,15 +28,21 @@ const AddBook = () => {
     <form id="add-book">
       <div className="field">
         <label>Book name:</label>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(event) => setData({ name: event.target.value })}
+        />
       </div>
       <div className="field">
         <label>Genre:</label>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(event) => setData({ genre: event.target.value })}
+        />
       </div>
       <div className="field">
         <label>Author:</label>
-        <select>
+        <select onChange={(event) => setData({ authorId: event.target.value })}>
           <option>Select author</option>
           {displayAuthors()}
         </select>
