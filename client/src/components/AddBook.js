@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { getAuthorsQuery } from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
+  const [bookData, setData] = useState({
+    name: '',
+    genre: '',
+    author: '',
+  })
 
   const displayAuthors = () => {
     return loading ? (
