@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { getAuthorsQuery } from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
+  const [bookData, setState] = useState({
+    name: '',
+    genre: '',
+    authorId: '',
+  })
 
   const displayAuthors = () => {
     return loading ? (
@@ -19,19 +24,28 @@ const AddBook = () => {
     )
   }
 
+  const handleChange = (event) => {
+    setState({ ...bookData, [event.target.name]: event.target.value })
+  }
+
+  const submitForm = (event) => {
+    event.preventDefault()
+    console.log(bookData)
+  }
+
   return (
-    <form id="add-book">
+    <form id="add-book" onSubmit={submitForm}>
       <div className="field">
         <label>Book name:</label>
-        <input type="text" />
+        <input name="name" type="text" onChange={handleChange} />
       </div>
       <div className="field">
         <label>Genre:</label>
-        <input type="text" />
+        <input name="genre" type="text" onChange={handleChange} />
       </div>
       <div className="field">
         <label>Author:</label>
-        <select>
+        <select name="authorId" onChange={handleChange}>
           <option>Select author</option>
           {displayAuthors()}
         </select>
