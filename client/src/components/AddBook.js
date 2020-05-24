@@ -28,8 +28,13 @@ const AddBook = () => {
     setState({ ...bookData, [event.target.name]: event.target.value })
   }
 
+  const submitForm = (event) => {
+    event.preventDefault()
+    console.log(bookData)
+  }
+
   return (
-    <form id="add-book">
+    <form id="add-book" onSubmit={submitForm}>
       <div className="field">
         <label>Book name:</label>
         <input name="name" type="text" onChange={handleChange} />
