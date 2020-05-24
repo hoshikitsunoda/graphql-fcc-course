@@ -1,9 +1,9 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-// import { getBooksQuery } from '../queries/queries'
+import { getBookQuery } from '../queries/queries'
 
 const BookDetails = () => {
-  const { loading, data } = useQuery(getBooksQuery)
+  const { loading, data } = useQuery(getBookQuery)
 
   return (
     <div id="book-details">
