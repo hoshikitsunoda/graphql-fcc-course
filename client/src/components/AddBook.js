@@ -4,7 +4,7 @@ import { getAuthorsQuery } from '../queries/queries'
 
 const AddBook = () => {
   const { loading, data } = useQuery(getAuthorsQuery)
-  const [bookData, setData] = useState({
+  const [bookData, setState] = useState({
     name: '',
     genre: '',
     authorId: '',
@@ -24,25 +24,23 @@ const AddBook = () => {
     )
   }
 
+  const handleChange = (event) => {
+    setState({ ...bookData, [event.target.name]: event.target.value })
+  }
+
   return (
     <form id="add-book">
       <div className="field">
         <label>Book name:</label>
-        <input
-          type="text"
-          onChange={(event) => setData({ name: event.target.value })}
-        />
+        <input name="name" type="text" onChange={handleChange} />
       </div>
       <div className="field">
         <label>Genre:</label>
-        <input
-          type="text"
-          onChange={(event) => setData({ genre: event.target.value })}
-        />
+        <input name="genre" type="text" onChange={handleChange} />
       </div>
       <div className="field">
         <label>Author:</label>
-        <select onChange={(event) => setData({ authorId: event.target.value })}>
+        <select name="authorId" onChange={handleChange}>
           <option>Select author</option>
           {displayAuthors()}
         </select>
